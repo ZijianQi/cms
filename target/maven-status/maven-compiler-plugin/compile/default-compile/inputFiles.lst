@@ -1,3 +1,11 @@
-C:\Users\Everlasting\Documents\github-projects\zijianznipe\src\main\java\znipe\model\News.java
-C:\Users\Everlasting\Documents\github-projects\zijianznipe\src\main\java\znipe\controller\NewsController.java
-C:\Users\Everlasting\Documents\github-projects\zijianznipe\src\main\java\znipe\Application.java
+C:\Users\Everlasting\Documents\github-projects\cms\src\main\java\znipe\Application.java
+C:\Users\Everlasting\Documents\github-projects\cms\src\main\java\znipe\exceptions\GlobalExceptionHandler.java
+C:\Users\Everlasting\Documents\github-projects\cms\src\main\java\znipe\business\NewsService.java
+C:\Users\Everlasting\Documents\github-projects\cms\src\main\java\znipe\config\SpringMongoConfig.java
+C:\Users\Everlasting\Documents\github-projects\cms\src\main\java\znipe\controller\NewsController.java
+C:\Users\Everlasting\Documents\github-projects\cms\src\main\java\znipe\model\Columns.java
+C:\Users\Everlasting\Documents\github-projects\cms\src\main\java\znipe\repository\Impl\NewsRepositoryImpl.java
+C:\Users\Everlasting\Documents\github-projects\cms\src\main\java\znipe\model\News.java
+C:\Users\Everlasting\Documents\github-projects\cms\src\main\java\znipe\repository\NewsRepository.java
+C:\Users\Everlasting\Documents\github-projects\cms\src\main\java\znipe\model\Column.java
+C:\Users\Everlasting\Documents\github-projects\cms\src\main\java\znipe\business\Impl\NewsServiceImpl.java

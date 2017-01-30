@@ -1,12 +1,12 @@
 package znipe.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import znipe.model.Column;
 import znipe.model.News;
-import znipe.repository.NewsRepository;
-import znipe.service.NewsServices;
+import znipe.business.NewsService;
+
+import java.io.FileNotFoundException;
 
 /**
  * Created by Everlasting on 2017-01-24.
@@ -15,36 +15,34 @@ import znipe.service.NewsServices;
 @RestController
 public class NewsController {
 
-    private final NewsServices newsServices;
-    private final NewsRepository newsRepository;
+    private final NewsService newsService;
 
     @Autowired
-    public NewsController(NewsServices newsServices,  NewsRepository newsRepository){
-        this.newsServices = newsServices;
-        this.newsRepository = newsRepository;
+    public NewsController(NewsService newsService) throws FileNotFoundException {
+        this.newsService = newsService;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/news")
-    public News fetchNews(){
-        return newsServices.fetchNews();
+    public News fetchNews() throws FileNotFoundException{
+        return newsService.fetchNews();
     }
 
     // add
     @RequestMapping(value = "/news", method = RequestMethod.POST)
-    public void insertNews(@RequestBody Column column){
-        newsServices.insert(column);
+    public void insertNews(@RequestBody Column column) throws Exception{
+        newsService.insert(column);
     }
 
     // delete
     @RequestMapping(value = "/news/{title}", method = RequestMethod.DELETE)
-    public void deleteNews(@PathVariable("title") String title){
-        newsServices.delete(title);
+    public void deleteNews(@PathVariable("title") String title) throws FileNotFoundException{
+        newsService.delete(title);
     }
 
     //modify
     @RequestMapping(value = "/news/{title}", method = RequestMethod.POST)
-    public void modifyNews(@RequestBody Column column, @PathVariable("title") String title){
-        newsServices.modify(column, title);
+    public void modifyNews(@RequestBody Column column, @PathVariable("title") String title) throws FileNotFoundException{
+        newsService.modify(column, title);
     }
 
 

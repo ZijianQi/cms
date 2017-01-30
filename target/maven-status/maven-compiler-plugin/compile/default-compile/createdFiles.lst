@@ -1,9 +1,7 @@
-znipe\business\Impl\NewsBusinessImpl.class
-znipe\business\NewsBusiness.class
+znipe\business\Impl\NewsServiceImpl.class
 znipe\repository\Impl\NewsRepositoryImpl.class
 znipe\Application.class
 znipe\controller\NewsController.class
+znipe\business\NewsService.class
 znipe\model\News.class
 znipe\repository\NewsRepository.class
-znipe\service\Impl\NewsServicesImpl.class
-znipe\service\NewsServices.class
