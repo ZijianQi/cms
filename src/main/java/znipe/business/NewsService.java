@@ -1,6 +1,7 @@
 package znipe.business;
 
 import znipe.model.Column;
+import znipe.model.Columns;
 import znipe.model.News;
 
 import java.io.FileNotFoundException;
@@ -11,8 +12,8 @@ import java.io.FileNotFoundException;
 
 public interface NewsService {
     News fetchNews() throws FileNotFoundException;
-    Boolean fetchNewsByTitle(String title) throws FileNotFoundException;
-    void insert(Column column) throws Exception;
+    Boolean isNewsExistingByTitle(String title) throws FileNotFoundException;
+    void insert(Columns columns) throws Exception;
     void delete(String title) throws FileNotFoundException;
     void modify(Column column, String title) throws FileNotFoundException;
 }

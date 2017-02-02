@@ -1,7 +1,11 @@
 znipe\business\Impl\NewsServiceImpl.class
+znipe\config\SpringMongoConfig.class
+znipe\model\Columns.class
 znipe\repository\Impl\NewsRepositoryImpl.class
 znipe\Application.class
+znipe\exceptions\GlobalExceptionHandler.class
 znipe\controller\NewsController.class
 znipe\business\NewsService.class
+znipe\model\Column.class
 znipe\model\News.class
 znipe\repository\NewsRepository.class

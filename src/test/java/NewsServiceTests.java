@@ -3,11 +3,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import znipe.business.Impl.NewsServiceImpl;
 import znipe.business.NewsService;
 import znipe.model.Column;
+import znipe.model.Columns;
 import znipe.model.News;
 import znipe.repository.NewsRepository;
 
 import java.io.FileNotFoundException;
 import java.nio.file.FileAlreadyExistsException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 
@@ -44,12 +47,12 @@ public class NewsServiceTests {
         }
 
     @Test
-    public void fetchNewsByTitle_should_call_on_IsNewsExistsByTitle() throws FileNotFoundException {
+    public void isNewsExistingByTitle_should_call_on_IsNewsExistsByTitle() throws FileNotFoundException {
         final NewsRepository newsRepository = mock(NewsRepository.class);
         final NewsService newsService = new NewsServiceImpl(newsRepository);
 
         String title = "test";
-        newsService.fetchNewsByTitle(title);
+        newsService.isNewsExistingByTitle(title);
         verify(newsRepository, times(1)).IsNewsExistsByTitle(title);
     }
 
@@ -60,15 +63,12 @@ public class NewsServiceTests {
         String test = "test";
 
         when(newsRepository.fetchNewsById()).thenReturn(null);
-        Column column = new Column();
-        //when title is null
-        column.setDescription(test);
-        column.setPic(test);
-        column.setHref(test);
-        newsService.insert(column);
-        column.setTitle(test);
-        newsService.insert(column);
+        Column column = new Column(test,null, test, test, test);
+        List<Column> columnsList = new ArrayList<>();
+        columnsList.add(column);
+        Columns columns = new Columns(columnsList);
 
+        newsService.insert(columns);
     }
 
     @Test(expected = FileAlreadyExistsException.class)
@@ -77,13 +77,13 @@ public class NewsServiceTests {
         final NewsService newsService = new NewsServiceImpl(newsRepository);
         String test = "test";
 
-        when(newsService.fetchNewsByTitle(test)).thenReturn(true);
-        Column column = new Column();
-        column.setDescription(test);
-        column.setPic(test);
-        column.setHref(test);
-        column.setTitle(test);
-        newsService.insert(column);
+        when(newsService.isNewsExistingByTitle(test)).thenReturn(true);
 
+        Column column = new Column(test,test, test, test, test);
+        List<Column> columnsList = new ArrayList<>();
+        columnsList.add(column);
+        Columns columns = new Columns(columnsList);
+
+        newsService.insert(columns);
     }
 }

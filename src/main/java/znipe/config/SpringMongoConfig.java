@@ -1,5 +1,6 @@
 package znipe.config;
 
+import com.mongodb.MongoClientURI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,7 +35,8 @@ public class SpringMongoConfig extends AbstractMongoConfiguration {
     @Override
     @Bean
     public Mongo mongo() throws Exception {
-        return new MongoClient(environment.getProperty("mongoClientPort"));
+        MongoClientURI uri  = new MongoClientURI(environment.getProperty("mongoClientUri"));
+        return new MongoClient(uri);
     }
 }
 

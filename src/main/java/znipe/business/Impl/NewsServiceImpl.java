@@ -1,7 +1,7 @@
 package znipe.business.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import znipe.business.NewsService;
 import znipe.model.Column;
 import znipe.model.Columns;
@@ -10,18 +10,15 @@ import znipe.repository.NewsRepository;
 
 import java.io.FileNotFoundException;
 import java.nio.file.FileAlreadyExistsException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Everlasting on 2017-01-24.
  */
 
-@Repository
+@Component
 public class NewsServiceImpl implements NewsService {
 
     private final NewsRepository newsRepository;
-
 
     @Autowired
     public NewsServiceImpl(NewsRepository newsRepository){
@@ -30,6 +27,7 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public News fetchNews() throws FileNotFoundException {
+
         News news = newsRepository.fetchNewsById();
         if (news == null){
             throw new FileNotFoundException();
@@ -38,39 +36,47 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public Boolean fetchNewsByTitle(String title) throws FileNotFoundException{
+    public Boolean isNewsExistingByTitle(String title) throws FileNotFoundException{
        return newsRepository.IsNewsExistsByTitle(title);
     }
 
     @Override
-    public void insert(Column column) throws Exception{
+    public void insert(Columns columns) throws Exception{
 
-        if(column.getTitle()==null || column.getDescription()==null || column.getHref()==null || column.getPic()==null)
-            throw new IllegalArgumentException();
+        for(Column column: columns.getColumns()) {
+            if (column.getTitle() == null || column.getDescription() == null || column.getHref() == null || column.getPic() == null) {
+                throw new IllegalArgumentException();
+            }
 
-        if(fetchNewsByTitle(column.getTitle())== true)
-            throw new FileAlreadyExistsException("the data exists already");
+            if (isNewsExistingByTitle(column.getTitle()) == true) {
+                throw new FileAlreadyExistsException("the data exists already");
+            }
+        }
 
-        List<Column> columns = new ArrayList<>();
-        columns.add(column);
-
-        News news = fetchNews();
-        news.getRows().add(new Columns(columns));
-        newsRepository.save(news);
+            News news = fetchNews();
+            news.getRows().add(columns);
+            newsRepository.save(news);
     }
 
     @Override
     public void delete(String title) throws FileNotFoundException{
-        if(title==null)
+        if(title==null) {
             throw new IllegalArgumentException();
+        }
 
         News news = fetchNews();
 
-        if(fetchNewsByTitle(title)== true) {
+        if(isNewsExistingByTitle(title)== true) {
+
             for (Columns columns : news.getRows()) {
                 for (Column c : columns.getColumns()) {
+
                     if (c.getTitle().equals(title)) {
-                        news.getRows().remove(columns);
+                        columns.getColumns().remove(c);
+
+                        if(columns.getColumns().size() == 0)
+                            news.getRows().remove(columns);
+
                         newsRepository.save(news);
                         return;
                     }
@@ -89,9 +95,9 @@ public class NewsServiceImpl implements NewsService {
 
         News news = fetchNews();
 
-        if(fetchNewsByTitle(title)== true) {
-            for (Columns columns : news.getRows()) {
-                for (Column c : columns.getColumns()) {
+        if(isNewsExistingByTitle(title)== true) {
+            news.getRows().forEach(columns -> {
+                columns.getColumns().forEach(c -> {
                     if (c.getTitle().equals(title)) {
                         c.setTitle(column.getTitle());
                         c.setPic(column.getPic());
@@ -101,11 +107,10 @@ public class NewsServiceImpl implements NewsService {
                         newsRepository.save(news);
                         return;
                     }
-                }
-            }
+                });
+            });
         }else{
             throw new FileNotFoundException();
         }
     }
-
 }

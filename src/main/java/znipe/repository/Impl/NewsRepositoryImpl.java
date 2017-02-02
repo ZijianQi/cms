@@ -3,7 +3,7 @@ package znipe.repository.Impl;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import znipe.model.News;
 import znipe.repository.NewsRepository;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -16,7 +16,7 @@ import static org.springframework.data.mongodb.core.query.Criteria.where;
  * Created by Everlasting on 2017-01-24.
  */
 
-@Component
+@Repository
 public class NewsRepositoryImpl implements NewsRepository{
 
     private final MongoTemplate mongo;
@@ -49,7 +49,6 @@ public class NewsRepositoryImpl implements NewsRepository{
 
     @Override
     public void test(){
-
     }
 }
 

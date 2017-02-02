@@ -16,8 +16,6 @@ import java.nio.file.FileAlreadyExistsException;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    // Logging here !!!
-
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Data is not found")
     @ExceptionHandler(FileNotFoundException.class)
     public ModelAndView FileNotFoundExceptionHandler(Exception exception) {
