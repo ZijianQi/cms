@@ -21,11 +21,20 @@ Functions:
 		
 		Sample:
 			Raw payload:
-			    {
-                    "pic" : "https://www.test.se/1.png",
-                    "title" : "Day 1 Summary ofuuu ESL One Genting 2017",
-                    "description" : "Digital Chaos and Newbee advancing to the semifinals",
-                    "href" : "https://www.test.comfinals-3376"
+			   {
+				"columns":[
+					{
+						"pic" : "http://www.dreamhack-leipzig.de/media/mandant/globale-verfuegbare-Medien/News-Upload/Dreamhack/DRM17_CSGOT_TEAMS_Open2groups.jpg",
+						"title" : "Teams, groups and schedule for Leipzig",
+						"description" : "A new year for DreamHack Open is upon us, and this year will deliver 9 CS:GO stops for you to enjoy",
+						"href" : "http://www.dreamhack-leipzig.de/news/teams-groups-and-schedule-for-leipzig/551005"
+					}, 
+					{
+						"pic" : "http://static.hltv.org/images/galleries/9313-medium/1477836791.8748.jpeg",
+						"title" : "DH Leipzig talent lineup announced ",
+						"description" : "DreamHack have revealed the talen lineup for DreamHack Open Leipzig",
+						"href" : "http://www.hltv.org/news/19604-dreamhack-leipzig-viewers-guide"
+					}]
 				}
 
 				
@@ -34,6 +43,9 @@ Functions:
 		Request type: DELETE
 		Assumption:
 			The title is unique in the DB collection.
+		
+		Description:
+			The {title} is consisted of strings ad spaces, without any other characters such as "'", """ or "-". 
 		
 		Sample:
 			Request link: http://{host}/news/Day 1 Summary ofuuu ESL One Genting 2017
@@ -45,8 +57,11 @@ Functions:
 		Raw headers: 
 				Content-Type: application/json
 
-	Assumption:
+		Assumption:
 			The title is unique in the DB collection.
+			
+		Description:
+			The {title} is consisted of strings ad spaces, without any other characters such as "'", """ or "-". 
 				
 		Sample:
 			Request link: http://{host}/news/Day 1 Summary ofuuu ESL One Genting 2017
@@ -57,9 +72,6 @@ Functions:
                     "description" : "Digital Chaos and Newbee advancing to the semifinals",
                     "href" : "https://www.test.comfinals-3376"
 				}
-			
-		
-
 				
 Exceptions:
 	FileNotFoundException:
@@ -83,6 +95,3 @@ Exceptions:
 		Response Http status code: 409
 		Response message: "the data exists already"
 		
-
-In addition:
-	The appliction.properties file is uploaded only in this case of demonstrating.
