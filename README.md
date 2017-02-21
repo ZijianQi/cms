@@ -5,10 +5,11 @@ Initialazation:
 	Put the first news_entry1 into the a collection called News.
 
 Functions:
+
+
 	List all news columns:
 		Request link: http://{host}/news
 		Request tye:  GET
-		
 		
 	Add a news column:
 		Request link: http://{host}/news
@@ -36,8 +37,8 @@ Functions:
 						"href" : "http://www.hltv.org/news/19604-dreamhack-leipzig-viewers-guide"
 					}]
 				}
-
-				
+	
+	
 	Delete a news column:
 		Request link: http://{host}/news/{title}
 		Request type: DELETE
@@ -72,8 +73,10 @@ Functions:
                     "description" : "Digital Chaos and Newbee advancing to the semifinals",
                     "href" : "https://www.test.comfinals-3376"
 				}
-				
+			
+			
 Exceptions:
+
 	FileNotFoundException:
 		Case:
 			If the fetched data from MongoDB is null or dose not exists, the exception will be thrown.
